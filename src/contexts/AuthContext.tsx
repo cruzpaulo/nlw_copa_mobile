@@ -29,7 +29,7 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
   const [isUserLoading, setIsUserLoading] = useState(false);
 
   const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId: '372511438170-7rmb1e2hfbcrfnqh4q8ujfmirnf1igaf.apps.googleusercontent.com',
+    clientId: process.env.CLIENT_ID,
     redirectUri: AuthSession.makeRedirectUri({ useProxy: true }),
     scopes: ['profile', 'email']
   });
@@ -84,10 +84,7 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
     <AuthContext.Provider value={{
       signIn,
       isUserLoading,
-      user: {
-        name: 'Paulo Cruz',
-        avatarUrl: 'https://github.com/cruzpaulo.png'
-      }
+      user
     }}>
       {children}
     </AuthContext.Provider>
